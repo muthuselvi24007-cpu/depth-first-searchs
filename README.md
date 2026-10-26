@@ -56,35 +56,31 @@ Now, the Stack becomes empty, which means we have visited all the nodes, and our
 <h3>PROGRAM:</h3>
 
 ```
-from collections import deque
 from collections import defaultdict
-def dfs(graph, start, visited, path):
-path.append(start)
-visited[start] = True
-for neighbour in graph[start]:
-if visited[neighbour] == False:
-dfs(graph, neighbour, visited, path)
-visited[neighbour] = True
-return path
+
+def dfs(graph,start,visited,path):
+  path.append(start)
+  visited[start]=True
+  for neighbour in graph[start]:
+    if not visited[neighbour]:
+      dfs(graph,neighbour,visited,path)
+  return path
+
+graph=defaultdict(list)
+n,e=map(int,input().split())
+for i in range(e):
+  u,v=input().split()
+  graph[u].append(v)
+  graph[v].append(u)
+
+start=list(graph.keys())[0]
+visited=defaultdict(bool)
+path=[]
+print("Sample Output:")
+traversed_path=dfs(graph,start,visited,path)
+print(traversed_path)
 
 
-graph = defaultdict(list)
-#Read number of nodes (n) and edges (e)
-n, e = map(int, input().split())
-
-
-#Read each edge connection
-for _ in range(e):
-u, v = map(str, input().split())
-graph[u].append(v)
-graph[v].append(u)
-
-
-start = 'A'
-visited = defaultdict(bool)
-path = []
-traversedpath = dfs(graph, start, visited, path)
-print(traversedpath)
 ```
 
 <hr>
@@ -120,6 +116,10 @@ F H <BR>
 <h3>Sample Output</h3>
 <hr>
 ['0', '1', '2', '3', '4']
+
+<h3>OUTPUT:</h3>
+<img width="767" height="413" alt="image" src="https://github.com/user-attachments/assets/3887eba7-83eb-4145-9ea4-f2019acd714a" />
+<img width="601" height="296" alt="image" src="https://github.com/user-attachments/assets/1a9d224f-090f-4d84-a821-040138410a32" />
 
 <hr>
 <h3>Result:</h3>
